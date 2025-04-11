@@ -32,23 +32,6 @@ variable "create_s3_remote_backend" {
 
 }
 
-# - CodeCommit -
-variable "codecommit_repos" {
-  type = map(object({
-    repository_name = string
-    description     = optional(string, null)
-    default_branch  = optional(string, "main")
-    tags            = optional(map(any), { "ContentType" = "Terraform Module" })
-  }))
-  description = "Collection of AWS CodeCommit Repositories you wish to create"
-  default     = {}
-
-  validation {
-    condition     = alltrue([for repo in values(var.codecommit_repos) : length(repo.repository_name) > 1 && length(repo.repository_name) <= 100])
-    error_message = "The name of one of the defined CodeCodecommit Repositories is too long. Repository names can be a maxmium of 100 characters, as the names are used by other resources throughout this module. This can cause deployment failures for AWS resources with smaller character limits for naming. Please ensure all repository names are 100 characters or less, and try again."
-  }
-}
-
 # - CodeBuild -
 variable "codebuild_projects" {
   type = map(object({
@@ -146,7 +129,6 @@ variable "enable_force_detach_policies" {
 
 
 # Terraform Remote State Resources
-# - CodeCommit -
 variable "tf_remote_state_resource_configs" {
   type = map(object({
     prefix           = optional(string, "my-prefix")
