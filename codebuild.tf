@@ -24,7 +24,7 @@ resource "aws_codebuild_project" "codebuild" {
   source_version = each.value.source_version
 
   artifacts {
-    type = "NO_ARTIFACTS"
+    type = "CODEPIPELINE"
   }
 
 logs_config {
