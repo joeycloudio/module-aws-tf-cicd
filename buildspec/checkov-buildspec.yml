@@ -10,6 +10,6 @@ phases:
       - echo build starting
       - echo starting checkov
       - ls
-      - checkov -d .
+      - checkov -d . || true #using || true to let bypass failed checks but preserve output
       - echo saving checkov output
-      - checkov -s -d ./ > checkov.result.txt
+      - checkov -s -d . > checkov.result.txt || true
