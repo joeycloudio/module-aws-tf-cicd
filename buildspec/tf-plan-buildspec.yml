@@ -1,4 +1,6 @@
-# Currently unused. You can use this buildspec to create an execution plan and require  manual approval step before the pipeline continues to the "apply" phase
+# Currently unused. You can use this buildspec to create an execution plan
+# and require manual approval before the pipeline continues to the "apply"
+# phase
 
 # version: 0.1
 # phases:
@@ -6,7 +8,7 @@
 #     commands:
 #       - terraform init
 #       - terraform validate
-
+#
 #   build:
 #     commands:
 #       - terraform plan

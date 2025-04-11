@@ -1,4 +1,6 @@
+---
 # Checkov
+
 version: 0.1
 phases:
   pre_build:
@@ -10,6 +12,6 @@ phases:
       - echo build starting
       - echo starting checkov
       - ls
-      - checkov -d . || true #using || true to let bypass failed checks but preserve output
+      - checkov -d . || true
       - echo saving checkov output
       - checkov -s -d . > checkov.result.txt || true
