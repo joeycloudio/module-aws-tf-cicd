@@ -38,7 +38,11 @@ resource "aws_codepipeline" "codepipeline" {
           output_artifacts = lookup(action.value, "output_artifacts", [])
           configuration = merge(
   lookup(action.value, "configuration", {}),
-  action.value["provider"] == "GitHub" ? { OAuthToken = var.github_token } : {}
+  action.value["provider"] == "GitHub" ? {
+    ConnectionArn    = var.codestar_connection_arn
+    FullRepositoryId = "joeycloudio/${each.value.repo_name}"
+    BranchName       = "main"
+  } : {}
 )
           role_arn         = lookup(action.value, "role_arn", null)
           run_order        = lookup(action.value, "run_order", null)

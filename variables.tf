@@ -170,8 +170,7 @@ variable "tags" {
   }
 }
 
-variable "github_token" {
-  description = "GitHub token retrieved from AWS Secrets Manager"
+variable "codestar_connection_arn" {
+  description = "The ARN of the CodeStar Connection used for GitHub source integration"
   type        = string
-  sensitive   = true
 }
