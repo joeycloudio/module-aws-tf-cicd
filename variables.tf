@@ -187,3 +187,9 @@ variable "tags" {
     "IAC_PROVIDER" = "Terraform"
   }
 }
+
+variable "github_token" {
+  description = "GitHub token retrieved from AWS Secrets Manager"
+  type        = string
+  sensitive   = true
+}
