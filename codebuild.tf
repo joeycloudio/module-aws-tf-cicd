@@ -16,10 +16,8 @@ resource "aws_codebuild_project" "codebuild" {
   }
 
   source {
-    type            = each.value.source_type
-    location        = each.value.source_location
-    git_clone_depth = each.value.source_clone_depth
-    buildspec       = file(each.value.path_to_build_spec)
+    type      = "CODEPIPELINE"
+    buildspec = each.value.path_to_build_spec
 
   }
 
