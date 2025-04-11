@@ -36,7 +36,10 @@ resource "aws_codepipeline" "codepipeline" {
           provider         = action.value["provider"]
           input_artifacts  = lookup(action.value, "input_artifacts", [])
           output_artifacts = lookup(action.value, "output_artifacts", [])
-          configuration    = lookup(action.value, "configuration", {})
+          configuration = merge(
+  lookup(action.value, "configuration", {}),
+  action.value["provider"] == "GitHub" ? { OAuthToken = var.github_token } : {}
+)
           role_arn         = lookup(action.value, "role_arn", null)
           run_order        = lookup(action.value, "run_order", null)
           region           = lookup(action.value, "region", data.aws_region.current.name)
