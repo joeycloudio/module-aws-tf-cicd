@@ -24,11 +24,14 @@ resource "aws_codebuild_project" "codebuild" {
       value = var.dockerhub_secret_arn
     }
 
-    registry_credential {
-    credential          = var.dockerhub_secret_arn
-    credential_provider = "SECRETS_MANAGER"
-    }
+    dynamic "registry_credential" {
+      for_each = lookup(each.value, "use_registry_credential", false) ? [1] : []
+      content {
+        credential          = var.dockerhub_secret_arn
+        credential_provider = "SECRETS_MANAGER"
+      }
   }
+}
 
   source {
     type      = "CODEPIPELINE"
