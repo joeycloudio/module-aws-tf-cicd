@@ -13,6 +13,11 @@ resource "aws_codebuild_project" "codebuild" {
     compute_type = each.value.env_compute_type
     image        = each.value.env_image
     type         = each.value.env_type
+
+    environment_variable {
+    name  = "CODESTAR_CONNECTION_ARN"
+    value = var.codestar_connection_arn
+    }
   }
 
   source {
