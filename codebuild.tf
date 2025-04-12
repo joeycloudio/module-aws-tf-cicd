@@ -10,13 +10,19 @@ resource "aws_codebuild_project" "codebuild" {
   service_role  = var.codebuild_service_role_arn != null ? var.codebuild_service_role_arn : aws_iam_role.codebuild_service_role[0].arn
 
   environment {
-    compute_type = each.value.env_compute_type
-    image        = each.value.env_image
-    type         = each.value.env_type
+    compute_type                = each.value.env_compute_type
+    image                       = each.value.env_image
+    type                        = each.value.env_type
+    image_pull_credentials_type = "SERVICE_ROLE"
 
     environment_variable {
     name  = "CODESTAR_CONNECTION_ARN"
     value = var.codestar_connection_arn
+    }
+
+    registry_credential {
+    credential          = var.dockerhub_secret_arn
+    credential_provider = "SECRETS_MANAGER"
     }
   }
 
