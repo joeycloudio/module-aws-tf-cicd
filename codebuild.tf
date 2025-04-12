@@ -13,7 +13,6 @@ resource "aws_codebuild_project" "codebuild" {
     compute_type                = each.value.env_compute_type
     image                       = each.value.env_image
     type                        = each.value.env_type
-    image_pull_credentials_type = "SERVICE_ROLE"
 
     environment_variable {
     name  = "CODESTAR_CONNECTION_ARN"
