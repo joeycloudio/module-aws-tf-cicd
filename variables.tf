@@ -169,13 +169,3 @@ variable "tags" {
     "IAC_PROVIDER" = "Terraform"
   }
 }
-
-variable "codestar_connection_arn" {
-  description = "The ARN of the CodeStar Connection used for GitHub source integration"
-  type        = string
-}
-
-variable "dockerhub_secret_arn" {
-  description = "ARN of DockerHub secret stored in AWS Secrets Manager"
-  type        = string
-}
