@@ -13,17 +13,21 @@ resource "aws_codebuild_project" "codebuild" {
     compute_type                = each.value.env_compute_type
     image                       = each.value.env_image
     type                        = each.value.env_type
-    image_pull_credentials_type = "SERVICE_ROLE"
 
     environment_variable {
     name  = "CODESTAR_CONNECTION_ARN"
     value = var.codestar_connection_arn
     }
 
-    registry_credential {
-    credential          = var.dockerhub_secret_arn
-    credential_provider = "SECRETS_MANAGER"
+    environment_variable {
+      name  = "DOCKERHUB_SECRET_ARN"
+      value = var.dockerhub_secret_arn
     }
+
+    # registry_credential {
+    # credential          = var.dockerhub_secret_arn
+    # credential_provider = "SECRETS_MANAGER"
+    # }
   }
 
   source {
