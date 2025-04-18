@@ -5,3 +5,5 @@ Reusable Terraform module for AWS CI/CD pipeline infrastructure.
 Trigger Test post GH authorization
 Test after ARN update
 last test of test pipeline for the night
+
+# trigger test - checking pipeline
